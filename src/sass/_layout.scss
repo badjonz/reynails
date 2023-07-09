@@ -1,0 +1,30 @@
+.nav {
+  background-color: var(--primary);
+  color: var(--text-secondary);
+  &-container {
+    max-width: 114rem;
+    margin: 0 auto;
+  }
+
+  &-row {
+    &--1,
+    &--2 {
+      display: flex;
+      justify-content: space-between;
+      padding: 2rem 0;
+    }
+  }
+
+  &-menu {
+    &__list {
+      display: flex;
+    }
+    &__item {
+      list-style: none;
+      padding: 1rem 2.5rem;
+    }
+    &__link {
+      font-size: 1.6rem;
+    }
+  }
+}
