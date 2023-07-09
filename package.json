@@ -1,7 +1,6 @@
 {
-  "name": "realestate",
-  "private": true,
-  "version": "0.0.0",
+  "name": "reynails",
+  "version": "1.0.0",
   "type": "module",
   "scripts": {
     "watch:sass": "node-sass src/sass/main.scss src/index.css -w",
