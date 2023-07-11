@@ -11,8 +11,12 @@
     &--2 {
       display: flex;
       justify-content: space-between;
-      padding: 2rem 0;
+      padding: 1.6rem 0;
     }
+  }
+
+  &-logo {
+    font-size: 2.4rem;
   }
 
   &-menu {
@@ -25,6 +29,93 @@
     }
     &__link {
       font-size: 1.6rem;
+      transition: all 0.2s;
+      &:hover,
+      &:active {
+        color: var(--text-primary);
+      }
+    }
+  }
+
+  &-socials {
+    margin-right: 2.2rem;
+    display: flex;
+    align-items: center;
+
+    &__item:not(:last-of-type) {
+      margin-right: 1rem;
+    }
+    &__item {
+      text-align: center;
+      position: relative;
+      height: 3rem;
+      width: 3rem;
+      border: 1px solid var(--text-secondary);
+      border-radius: 50%;
+      cursor: pointer;
+      transition: all 0.2s;
+
+      &:hover {
+        background-color: var(--text-primary);
+      }
+    }
+
+    &__link {
+      position: absolute;
+      margin-top: 2px;
+
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      display: inline-block;
+    }
+  }
+
+  &-contact__link {
+    display: flex;
+    align-items: center;
+    padding: 1rem 0;
+    font-size: 1.1rem;
+    transition: all 0.2s;
+    &:hover {
+      color: var(--text-primary);
+    }
+  }
+  &-contact__icon,
+  &-contact__email {
+    display: inline-block;
+  }
+  &-contact__icon {
+    margin-right: 3px;
+    margin-top: 5px;
+  }
+}
+
+.hero {
+  height: 80vh;
+  background-color: var(--secondary);
+
+  .header {
+    h1 {
+      color: var(--text-primary);
+    }
+    &-container {
+      max-width: var(--grid);
+      margin: 0 auto;
+      text-align: center;
+      padding: 12rem 0;
+    }
+
+    &-main {
+      font-size: 4.4rem;
+      display: block;
+    }
+
+    &-secondary {
+      display: block;
+      margin-top: 8rem;
+      font-size: 2rem;
+      font-weight: 600;
     }
   }
 }

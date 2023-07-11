@@ -3,7 +3,8 @@
   --secondary: #f9dfe0;
   --secondary-light: #fef0ee;
   --text-primary: #2f405e;
-  --text-secondary: #f4f4f4; }
+  --text-secondary: #f4f4f4;
+  --grid: 114rem; }
 
 *,
 *::after,
@@ -35,11 +36,72 @@ body {
   .nav-row--1, .nav-row--2 {
     display: flex;
     justify-content: space-between;
-    padding: 2rem 0; }
+    padding: 1.6rem 0; }
+  .nav-logo {
+    font-size: 2.4rem; }
   .nav-menu__list {
     display: flex; }
   .nav-menu__item {
     list-style: none;
     padding: 1rem 2.5rem; }
   .nav-menu__link {
-    font-size: 1.6rem; }
+    font-size: 1.6rem;
+    transition: all 0.2s; }
+    .nav-menu__link:hover, .nav-menu__link:active {
+      color: var(--text-primary); }
+  .nav-socials {
+    margin-right: 2.2rem;
+    display: flex;
+    align-items: center; }
+    .nav-socials__item:not(:last-of-type) {
+      margin-right: 1rem; }
+    .nav-socials__item {
+      text-align: center;
+      position: relative;
+      height: 3rem;
+      width: 3rem;
+      border: 1px solid var(--text-secondary);
+      border-radius: 50%;
+      cursor: pointer;
+      transition: all 0.2s; }
+      .nav-socials__item:hover {
+        background-color: var(--text-primary); }
+    .nav-socials__link {
+      position: absolute;
+      margin-top: 2px;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      display: inline-block; }
+  .nav-contact__link {
+    display: flex;
+    align-items: center;
+    padding: 1rem 0;
+    font-size: 1.1rem;
+    transition: all 0.2s; }
+    .nav-contact__link:hover {
+      color: var(--text-primary); }
+  .nav-contact__icon, .nav-contact__email {
+    display: inline-block; }
+  .nav-contact__icon {
+    margin-right: 3px;
+    margin-top: 5px; }
+
+.hero {
+  height: 80vh;
+  background-color: var(--secondary); }
+  .hero .header h1 {
+    color: var(--text-primary); }
+  .hero .header-container {
+    max-width: var(--grid);
+    margin: 0 auto;
+    text-align: center;
+    padding: 12rem 0; }
+  .hero .header-main {
+    font-size: 4.4rem;
+    display: block; }
+  .hero .header-secondary {
+    display: block;
+    margin-top: 8rem;
+    font-size: 2rem;
+    font-weight: 600; }
