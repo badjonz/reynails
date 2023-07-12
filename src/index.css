@@ -1,7 +1,7 @@
 :root {
   --primary: #bb6977;
   --secondary: #f9dfe0;
-  --secondary-light: #fef0ee;
+  --secondary-light: #fefaf9;
   --text-primary: #2f405e;
   --text-secondary: #f4f4f4;
   --grid: 114rem; }
@@ -88,7 +88,6 @@ body {
     margin-top: 5px; }
 
 .hero {
-  height: 80vh;
   background-color: var(--secondary); }
   .hero .header h1 {
     color: var(--text-primary); }
@@ -96,12 +95,60 @@ body {
     max-width: var(--grid);
     margin: 0 auto;
     text-align: center;
-    padding: 12rem 0; }
+    padding: 10rem 0; }
   .hero .header-main {
-    font-size: 4.4rem;
-    display: block; }
+    font-size: 4.2rem;
+    display: block;
+    font-family: 'DM Serif Text', serif; }
   .hero .header-secondary {
     display: block;
     margin-top: 8rem;
     font-size: 2rem;
+    font-family: 'Poppins', sans-serif;
     font-weight: 600; }
+  .hero .header .flex-cards {
+    display: flex;
+    padding: 8rem 0;
+    padding-bottom: 5rem; }
+    .hero .header .flex-cards__item:not(:last-of-type) {
+      margin-right: 3rem; }
+    .hero .header .flex-cards__item {
+      background-color: var(--secondary-light);
+      flex: 1;
+      height: 28rem;
+      padding: 5rem; }
+    .hero .header .flex-cards h2 {
+      font-size: 2.6rem;
+      margin-bottom: 3rem;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 600; }
+    .hero .header .flex-cards p {
+      font-size: 1.4rem; }
+    .hero .header .flex-cards span {
+      display: block; }
+  .hero .header .btn {
+    padding: 1.3rem 2.5rem;
+    background-color: var(--primary);
+    color: var(--text-secondary);
+    border: none; }
+
+.booking {
+  padding: 6rem 0;
+  background-color: var(--secondary-light); }
+  .booking .container {
+    max-width: var(--grid);
+    margin: 0 auto; }
+  .booking h2 {
+    text-align: center;
+    color: var(--text-primary);
+    font-size: 3.2rem; }
+
+h1,
+h2 {
+  font-family: 'DM Serif Text', serif; }
+
+h3,
+h4,
+p {
+  font-family: 'Poppins', sans-serif;
+  color: var(--text-primary); }

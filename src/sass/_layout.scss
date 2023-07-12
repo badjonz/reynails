@@ -92,7 +92,6 @@
 }
 
 .hero {
-  height: 80vh;
   background-color: var(--secondary);
 
   .header {
@@ -103,19 +102,73 @@
       max-width: var(--grid);
       margin: 0 auto;
       text-align: center;
-      padding: 12rem 0;
+      padding: 10rem 0;
     }
 
     &-main {
-      font-size: 4.4rem;
+      font-size: 4.2rem;
       display: block;
+      font-family: 'DM Serif Text', serif;
     }
 
     &-secondary {
       display: block;
       margin-top: 8rem;
       font-size: 2rem;
+      font-family: 'Poppins', sans-serif;
       font-weight: 600;
     }
+
+    .flex-cards {
+      display: flex;
+      padding: 8rem 0;
+      padding-bottom: 5rem;
+
+      &__item:not(:last-of-type) {
+        margin-right: 3rem;
+      }
+
+      &__item {
+        background-color: var(--secondary-light);
+        flex: 1;
+        height: 28rem;
+        padding: 5rem;
+      }
+
+      h2 {
+        font-size: 2.6rem;
+        margin-bottom: 3rem;
+        font-family: 'Poppins', sans-serif;
+        font-weight: 600;
+      }
+
+      p {
+        font-size: 1.4rem;
+      }
+      span {
+        display: block;
+      }
+    }
+
+    .btn {
+      padding: 1.3rem 2.5rem;
+      background-color: var(--primary);
+      color: var(--text-secondary);
+      border: none;
+    }
+  }
+}
+
+.booking {
+  padding: 6rem 0;
+  background-color: var(--secondary-light);
+  .container {
+    max-width: var(--grid);
+    margin: 0 auto;
+  }
+  h2 {
+    text-align: center;
+    color: var(--text-primary);
+    font-size: 3.2rem;
   }
 }
