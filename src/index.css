@@ -130,7 +130,14 @@ body {
     padding: 1.3rem 2.5rem;
     background-color: var(--primary);
     color: var(--text-secondary);
-    border: none; }
+    border: none;
+    transition: all 0.3s; }
+    .hero .header .btn:hover {
+      box-shadow: 0 0.8rem 1.5rem rgba(0, 0, 0, 0.2);
+      transform: translateY(-3px); }
+    .hero .header .btn:active {
+      box-shadow: 0 0.5rem 0.8rem rgba(0, 0, 0, 0.2);
+      transform: translateY(-1px); }
 
 .booking {
   padding: 6rem 0;

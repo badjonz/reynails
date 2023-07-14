@@ -1,6 +1,7 @@
 import React from 'react';
-import { FaInstagram, FaFacebookF, FaTwitter } from 'react-icons/fa';
+
 import { BsFillEnvelopeAtFill } from 'react-icons/bs';
+import SocialIcons from '../SocialIcons/SocialIcons';
 
 const Header = () => {
   return (
@@ -15,23 +16,8 @@ const Header = () => {
               reyleciadavidson@gmail.com
             </span>
           </a>
-          <div className='nav-socials'>
-            <div className='nav-socials__item'>
-              <a className='nav-socials__link' href='#'>
-                <FaInstagram size={14} />
-              </a>
-            </div>
-            <div className='nav-socials__item'>
-              <a className='nav-socials__link' href='#'>
-                <FaTwitter size={14} />
-              </a>
-            </div>
-            <div className='nav-socials__item'>
-              <a className='nav-socials__link' href='#'>
-                <FaFacebookF size={14} />
-              </a>
-            </div>
-          </div>
+
+          <SocialIcons />
         </div>
         <div className='nav-row--2'>
           <h1 className='nav-logo'>Raze Nails</h1>
