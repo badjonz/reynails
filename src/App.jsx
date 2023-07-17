@@ -1,13 +1,13 @@
 import Header from './components/Header/Header';
 import Hero from './components/Hero/Hero';
-import Book from './components/Book/Book';
+import BookingList from './components/BookingList/BookingList';
 
 function App() {
   return (
     <div className='App'>
       <Header />
       <Hero />
-      <Book />
+      <BookingList />
     </div>
   );
 }
