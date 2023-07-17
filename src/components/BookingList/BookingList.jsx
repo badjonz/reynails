@@ -1,5 +1,4 @@
 import React from 'react';
-
 import BookingCard from '../BookingCard/BookingCard';
 
 const Book = () => {

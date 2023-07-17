@@ -1,7 +1,19 @@
 import React from 'react';
+import { useState } from 'react';
 import BookingModal from '../BookingModal/BookingModal';
 
-const BookingCard = ({ photoName, title, toggleModal }) => {
+const BookingCard = ({ photoName, title }) => {
+  const [modal, setModal] = useState(false);
+  const toggleModal = function () {
+    // console.log('You clicked the button');
+    setModal(!modal);
+  };
+  if (modal) {
+    document.body.classList.add('active-modal');
+  } else {
+    document.body.classList.remove('active-modal');
+  }
+
   return (
     <>
       <div className='booking-card'>
@@ -13,6 +25,12 @@ const BookingCard = ({ photoName, title, toggleModal }) => {
           </button>
         </div>
       </div>
+      <BookingModal
+        modal={modal}
+        toggleModal={toggleModal}
+        photoName={photoName}
+        title={title}
+      />
     </>
   );
 };
