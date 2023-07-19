@@ -16,7 +16,7 @@ const BookingCard = ({ photoName, title }) => {
 
   return (
     <>
-      <div className='booking-card'>
+      <li className='booking-card'>
         <img src={photoName} alt='' className='booking-card__img' />
         <div className='booking-card__container'>
           <h3 className='booking-card__header'>{title}</h3>
@@ -24,7 +24,7 @@ const BookingCard = ({ photoName, title }) => {
             Book
           </button>
         </div>
-      </div>
+      </li>
       <BookingModal
         modal={modal}
         toggleModal={toggleModal}
