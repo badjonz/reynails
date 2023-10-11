@@ -149,24 +149,6 @@
         display: block;
       }
     }
-
-    .btn {
-      padding: 1.3rem 2.5rem;
-      background-color: var(--primary);
-      color: var(--text-secondary);
-      border: none;
-      transition: all 0.3s;
-
-      &:hover {
-        box-shadow: 0 0.8rem 1.5rem rgba(0, 0, 0, 0.2);
-        transform: translateY(-3px);
-      }
-
-      &:active {
-        box-shadow: 0 0.5rem 0.8rem rgba(0, 0, 0, 0.2);
-        transform: translateY(-1px);
-      }
-    }
   }
 }
 
@@ -236,7 +218,7 @@
       width: 60%;
       height: 75vh;
       background-color: var(--secondary-light);
-      padding: 6rem;
+      padding: 3rem 6rem;
       border-radius: 5px;
       box-shadow: 0 3rem 5rem rgba(0, 0, 0, 0.3);
       z-index: 25;
@@ -335,6 +317,18 @@
           margin-left: -1.2rem;
           cursor: pointer;
         }
+      }
+
+      &__comment {
+        resize: none;
+        width: 70%;
+        height: 8rem;
+      }
+
+      &__button {
+        cursor: pointer;
+        border-radius: 2px;
+        flex: 1;
       }
     }
     input[type='date']::placeholder {

@@ -27,6 +27,19 @@ body {
   scroll-behavior: smooth;
   box-sizing: border-box; }
 
+.btn {
+  padding: 1.3rem 2.5rem;
+  background-color: var(--primary);
+  color: var(--text-secondary);
+  border: none;
+  transition: all 0.3s; }
+  .btn:hover {
+    box-shadow: 0 0.8rem 1.5rem rgba(0, 0, 0, 0.2);
+    transform: translateY(-3px); }
+  .btn:active {
+    box-shadow: 0 0.5rem 0.8rem rgba(0, 0, 0, 0.2);
+    transform: translateY(-1px); }
+
 .nav {
   background-color: var(--primary);
   color: var(--text-secondary); }
@@ -126,18 +139,6 @@ body {
       font-size: 1.4rem; }
     .hero .header .flex-cards span {
       display: block; }
-  .hero .header .btn {
-    padding: 1.3rem 2.5rem;
-    background-color: var(--primary);
-    color: var(--text-secondary);
-    border: none;
-    transition: all 0.3s; }
-    .hero .header .btn:hover {
-      box-shadow: 0 0.8rem 1.5rem rgba(0, 0, 0, 0.2);
-      transform: translateY(-3px); }
-    .hero .header .btn:active {
-      box-shadow: 0 0.5rem 0.8rem rgba(0, 0, 0, 0.2);
-      transform: translateY(-1px); }
 
 .booking {
   padding: 6rem 0;
@@ -189,7 +190,7 @@ body {
     width: 60%;
     height: 75vh;
     background-color: var(--secondary-light);
-    padding: 6rem;
+    padding: 3rem 6rem;
     border-radius: 5px;
     box-shadow: 0 3rem 5rem rgba(0, 0, 0, 0.3);
     z-index: 25;
@@ -256,6 +257,14 @@ body {
     background-color: var(--primary);
     margin-left: -1.2rem;
     cursor: pointer; }
+  .booking-modal .form__comment {
+    resize: none;
+    width: 70%;
+    height: 8rem; }
+  .booking-modal .form__button {
+    cursor: pointer;
+    border-radius: 2px;
+    flex: 1; }
   .booking-modal input[type='date']::placeholder {
     color: var(--text-secondary); }
   .booking-modal, .booking-overlay {

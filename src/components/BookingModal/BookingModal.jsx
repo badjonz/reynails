@@ -3,7 +3,56 @@ import { useState } from 'react';
 
 import BookingCard from '../BookingCard/BookingCard';
 
+const booking = [
+  {
+    id: 984294,
+    design: 'Test 1',
+    name: 'Jon Kumar',
+    email: 'badjonz@gmail.com',
+    bookDate: '2023-10-01',
+    apptDate: '2023-10-09',
+    time: '11:00',
+    comments: 'I would like this in a different colour if possible.',
+  },
+  {
+    id: 984294,
+    design: 'Test 4',
+    name: 'Peter Ann',
+    email: 'pj@gmail.com',
+    bookDate: '2023-10-01',
+    apptDate: '2023-10-09',
+    time: '14:00',
+    comments: 'Is this available in pink?',
+  },
+  {
+    id: 984294,
+    design: 'Test 3',
+    name: 'Fatma',
+    email: 'fatma@gmail.com',
+    bookDate: '2023-10-01',
+    apptDate: '2023-10-18',
+    time: '14:00',
+    comments: 'Could I make a little changes to this design?',
+  },
+  {
+    id: 984294,
+    design: 'Test 1',
+    name: 'Heshani',
+    email: 'heshani@gmail.com',
+    bookDate: '2023-10-01',
+    apptDate: '2023-10-21',
+    time: '17:30',
+    comments: 'Hello, my name is Heshani.',
+  },
+];
+
 const BookingModal = ({ modal, toggleModal, photoName, title }) => {
+  const [fullName, setFullName] = useState('');
+  const [email, setEmail] = useState('');
+  const [apptDate, setApptDate] = useState('');
+  const [time, setTime] = useState('');
+  const [comment, setComment] = useState('');
+
   const handleSubmit = function (e) {
     e.preventDefault();
   };
@@ -13,6 +62,7 @@ const BookingModal = ({ modal, toggleModal, photoName, title }) => {
   function handleColorChange(e) {
     // Get the new value of the input
     const newValue = e.target.value;
+    setApptDate(newValue);
 
     // Check if the new value is empty or not
     if (newValue === '') {
@@ -22,6 +72,11 @@ const BookingModal = ({ modal, toggleModal, photoName, title }) => {
       // If not empty, set the color to something else
       setColor('#2f405e');
     }
+  }
+
+  function onValueChange(e) {
+    setTime(e.target.value);
+    console.log(time);
   }
 
   return (
@@ -48,8 +103,10 @@ const BookingModal = ({ modal, toggleModal, photoName, title }) => {
                       type='text'
                       className='form-input form__full-name'
                       placeholder='ex. John Doe'
-                      id='fullname'
-                      name='fullname'
+                      id='fullName'
+                      name='fullName'
+                      value={fullName}
+                      onChange={(e) => setFullName(e.target.value)}
                     />
                   </div>
                   <div className='form-row'>
@@ -59,6 +116,8 @@ const BookingModal = ({ modal, toggleModal, photoName, title }) => {
                     <input
                       type='email'
                       name='email'
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
                       id='email'
                       placeholder='johndoe@gmail.com'
                       className='form-input form__email'
@@ -70,8 +129,9 @@ const BookingModal = ({ modal, toggleModal, photoName, title }) => {
                     </label>
                     <input
                       type='date'
-                      name='date'
-                      id='date'
+                      name='apptDate'
+                      id='apptDate'
+                      value={apptDate}
                       className='form-input form__date'
                       placeholder='dd/mm/yyyy'
                       style={{ color: color }}
@@ -85,24 +145,58 @@ const BookingModal = ({ modal, toggleModal, photoName, title }) => {
 
                     <ul className='form-time__list'>
                       <li className='form-time__item'>
-                        <input type='radio' name='time-1' id='time-1' />
-                        <label className='form-time__btn' htmlFor='time-1'>
+                        <input
+                          id='time1'
+                          type='radio'
+                          value='11:00'
+                          checked={time === '11:00'}
+                          onChange={onValueChange}
+                        />
+                        <label className='form-time__btn' htmlFor='time1'>
                           11:00
                         </label>
                       </li>
                       <li className='form-time__item'>
-                        <input type='radio' name='time-2' id='time-2' />
-                        <label className='form-time__btn' htmlFor='time-2'>
+                        <input
+                          id='time2'
+                          type='radio'
+                          value='14:00'
+                          checked={time === '14:00'}
+                          onChange={onValueChange}
+                        />
+                        <label className='form-time__btn' htmlFor='time2'>
                           14:00
                         </label>
                       </li>
                       <li className='form-time__item'>
-                        <input type='radio' name='time-3' id='time-3' />
-                        <label className='form-time__btn' htmlFor='time-3'>
+                        <input
+                          id='time3'
+                          type='radio'
+                          value='17:30'
+                          checked={time === '17:30'}
+                          onChange={onValueChange}
+                        />
+                        <label className='form-time__btn' htmlFor='time3'>
                           17:30
                         </label>
                       </li>
                     </ul>
+                  </div>
+
+                  <div className='form-row'>
+                    <label className='form-label' htmlFor='comment'>
+                      Comments
+                    </label>
+                    <textarea
+                      name='comment'
+                      id='comment'
+                      value={comment}
+                      onChange={(e) => setComment(e.target.value)}
+                      className='form-input form__comment'
+                    ></textarea>
+                  </div>
+                  <div className='form-row'>
+                    <button className='btn form__button'>Book</button>
                   </div>
                 </div>
               </form>
