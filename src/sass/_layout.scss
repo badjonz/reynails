@@ -307,6 +307,26 @@
             visibility: hidden;
             opacity: 0;
           }
+
+          input[type='radio']:checked + label {
+            background-color: #fff;
+            color: var(--primary);
+            border: var(--primary) solid 1px;
+          }
+          input[type='radio']:disabled + label {
+            position: relative;
+            cursor: not-allowed;
+            opacity: 0.4;
+          }
+          // input[type='radio']:disabled + label::after {
+          //   content: '';
+          //   position: absolute;
+          //   top: 50%;
+          //   left: 0;
+          //   right: 0;
+          //   height: 1px;
+          //   background-color: white;
+          // }
         }
 
         &__btn {
@@ -316,6 +336,12 @@
           background-color: var(--primary);
           margin-left: -1.2rem;
           cursor: pointer;
+          transition: all 0.1s;
+          // &--selected {
+          //   background-color: #fff;
+          //   color: var(--primary);
+          //   border: var(--primary) solid 1px;
+          // }
         }
       }
 

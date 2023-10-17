@@ -250,13 +250,22 @@ body {
   .booking-modal .form-time__item input[type='radio'] {
     visibility: hidden;
     opacity: 0; }
+  .booking-modal .form-time__item input[type='radio']:checked + label {
+    background-color: #fff;
+    color: var(--primary);
+    border: var(--primary) solid 1px; }
+  .booking-modal .form-time__item input[type='radio']:disabled + label {
+    position: relative;
+    cursor: not-allowed;
+    opacity: 0.4; }
   .booking-modal .form-time__btn {
     padding: 1.2rem 2rem;
     color: #fff;
     border-radius: 2px;
     background-color: var(--primary);
     margin-left: -1.2rem;
-    cursor: pointer; }
+    cursor: pointer;
+    transition: all 0.1s; }
   .booking-modal .form__comment {
     resize: none;
     width: 70%;
