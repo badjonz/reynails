@@ -1,5 +1,9 @@
 import React from 'react';
 import { useState } from 'react';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
+import { addDays, parseISO } from 'date-fns';
+import { db } from '../../firebase.config';
 
 import BookingCard from '../BookingCard/BookingCard';
 
@@ -9,8 +13,8 @@ const booking = [
     design: 'Test 1',
     name: 'Jon Kumar',
     email: 'badjonz@gmail.com',
-    bookDate: '2023-10-01',
-    apptDate: '2023-10-09',
+    bookDate: '2023-11-24',
+    apptDate: '2023-12-01',
     time: '11:00',
     comments: 'I would like this in a different colour if possible.',
   },
@@ -19,8 +23,8 @@ const booking = [
     design: 'Test 4',
     name: 'Peter Ann',
     email: 'pj@gmail.com',
-    bookDate: '2023-10-01',
-    apptDate: '2023-10-09',
+    bookDate: '2023-11-28',
+    apptDate: '2023-12-05',
     time: '14:00',
     comments: 'Is this available in pink?',
   },
@@ -29,8 +33,8 @@ const booking = [
     design: 'Test 3',
     name: 'Fatma',
     email: 'fatma@gmail.com',
-    bookDate: '2023-10-01',
-    apptDate: '2023-10-18',
+    bookDate: '2023-11-25',
+    apptDate: '2023-12-02',
     time: '14:00',
     comments: 'Could I make a little changes to this design?',
   },
@@ -39,8 +43,8 @@ const booking = [
     design: 'Test 1',
     name: 'Heshani',
     email: 'heshani@gmail.com',
-    bookDate: '2023-10-01',
-    apptDate: '2023-10-21',
+    bookDate: '2023-11-25',
+    apptDate: '2023-12-07',
     time: '17:30',
     comments: 'Hello, my name is Heshani.',
   },
@@ -54,14 +58,22 @@ const BookingModal = ({ modal, toggleModal, photoName, title }) => {
   const [time, setTime] = useState('');
   const [comment, setComment] = useState('');
 
+  let dateObj = new Date();
+  let month = dateObj.getUTCMonth() + 1; //months from 1-12
+  let day = dateObj.getUTCDate();
+  let year = dateObj.getUTCFullYear();
+  const bookDate = `${year}-${month}-${day}`;
+
+  const weekFromBookingDate = `${year}-${month}-${day + 7}`;
+
   const handleSubmit = function (e) {
     e.preventDefault();
 
-    let dateObj = new Date();
-    let month = dateObj.getUTCMonth() + 1; //months from 1-12
-    let day = dateObj.getUTCDate();
-    let year = dateObj.getUTCFullYear();
-    const bookDate = `${year}-${month}-${day}`;
+    // let dateObj = new Date();
+    // let month = dateObj.getUTCMonth() + 1; //months from 1-12
+    // let day = dateObj.getUTCDate();
+    // let year = dateObj.getUTCFullYear();
+    // const bookDate = `${year}-${month}-${day}`;
     const id = crypto.randomUUID();
 
     const newBooking = {
@@ -79,9 +91,10 @@ const BookingModal = ({ modal, toggleModal, photoName, title }) => {
 
   const [color, setColor] = useState('#757575');
 
-  function handleColorChange(e) {
+  function handleDateChange(e) {
     // Get the new value of the input
     const newValue = e.target.value;
+
     setApptDate(newValue);
 
     // Check if the new value is empty or not
@@ -164,8 +177,17 @@ const BookingModal = ({ modal, toggleModal, photoName, title }) => {
                       className='form-input form__date'
                       placeholder='dd/mm/yyyy'
                       style={{ color: color }}
-                      onChange={handleColorChange}
+                      onChange={handleDateChange}
+                      min={weekFromBookingDate}
                     />
+                    {/* <DatePicker
+                      className='form-input'
+                      showIcon
+                      selected={apptDate}
+                      dateFormat='yyyy-MM-dd'
+                      onChange={handleDateChange}
+                      minDate={new Date()}
+                    /> */}
                   </div>
                   <div className='form-row'>
                     <label className='form-label' htmlFor='time'>

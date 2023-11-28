@@ -1,13 +1,24 @@
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Header from './components/Header/Header';
-import Hero from './components/Hero/Hero';
-import BookingList from './components/BookingList/BookingList';
+import Index from './pages/Index';
+import Profile from './pages/Profile';
+import LogIn from './pages/LogIn';
+import SignUp from './pages/SignUp';
+import ForgotPassword from './pages/ForgotPassword';
 
 function App() {
   return (
     <div className='App'>
-      <Header />
-      <Hero />
-      <BookingList />
+      <Router>
+        <Header />
+        <Routes>
+          <Route path='/' element={<Index />} />
+          <Route path='/profile' element={<LogIn />} />
+          <Route path='/log-in' element={<LogIn />} />
+          <Route path='/sign-up' element={<SignUp />} />
+          <Route path='/forgot-password' element={<ForgotPassword />} />
+        </Routes>
+      </Router>
     </div>
   );
 }
