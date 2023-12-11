@@ -19,6 +19,22 @@ const Header = () => {
               reyleciadavidson@gmail.com
             </span>
           </a>
+          <div className='nav-log'>
+            <a
+              href=''
+              className='nav-log-btn nav-log-btn--1'
+              onClick={() => navigate('/log-in')}
+            >
+              Login
+            </a>
+            <a
+              href=''
+              className='nav-log-btn nav-log-btn--2'
+              onClick={() => navigate('/sign-up')}
+            >
+              Sign up
+            </a>
+          </div>
 
           <SocialIcons />
         </div>

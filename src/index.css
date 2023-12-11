@@ -48,10 +48,23 @@ body {
     margin: 0 auto; }
   .nav-row--1, .nav-row--2 {
     display: flex;
-    justify-content: space-between;
     padding: 1.6rem 0; }
+  .nav-row--1 .nav-log {
+    display: flex;
+    align-items: center;
+    text-align: center; }
+    .nav-row--1 .nav-log-btn {
+      padding: 0.7rem 0.7rem;
+      width: 8rem;
+      border-radius: 20px;
+      border: 1px #fff solid;
+      margin-right: 1rem;
+      transition: all 0.2s; }
+      .nav-row--1 .nav-log-btn:hover, .nav-row--1 .nav-log-btn:active {
+        background-color: var(--text-primary); }
   .nav-logo {
-    font-size: 2.4rem; }
+    font-size: 2.4rem;
+    margin-right: auto; }
   .nav-menu__list {
     display: flex; }
   .nav-menu__item {
@@ -91,7 +104,8 @@ body {
     align-items: center;
     padding: 1rem 0;
     font-size: 1.1rem;
-    transition: all 0.2s; }
+    transition: all 0.2s;
+    margin-right: auto; }
     .nav-contact__link:hover {
       color: var(--text-primary); }
   .nav-contact__icon, .nav-contact__email {
@@ -290,6 +304,66 @@ body {
 
 body.active-modal {
   overflow-y: hidden; }
+
+#login {
+  background-color: var(--secondary);
+  padding: 10rem 25rem; }
+  #login .login-container {
+    background-color: var(--secondary-light);
+    max-width: 40rem;
+    margin: 0 auto;
+    border-radius: 3px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+    padding: 2rem 3rem; }
+    #login .login-container header {
+      text-align: center;
+      padding: 2rem; }
+      #login .login-container header .form-header {
+        font-size: 2.6rem;
+        color: var(--text-primary); }
+    #login .login-container .form-input-container {
+      margin-bottom: 1.8rem;
+      text-align: center; }
+      #login .login-container .form-input-container input {
+        display: block;
+        padding: 1.5rem;
+        width: 100%;
+        margin: 0 auto;
+        border-radius: 4px;
+        border-style: none;
+        border: 1px solid #d4d4d4;
+        transition: all 0.2s; }
+        #login .login-container .form-input-container input:hover {
+          border: 1px solid var(--text-primary); }
+      #login .login-container .form-input-container .form-input__btn {
+        padding: 1.5rem;
+        width: 100%;
+        border: none;
+        border-radius: 4px;
+        background-color: var(--primary);
+        color: #fff;
+        font-size: 1.6rem; }
+      #login .login-container .form-input-container .form-input__forgot-password {
+        font-size: 1.4rem;
+        color: var(--text-primary); }
+      #login .login-container .form-input-container .form-input__or {
+        position: relative;
+        width: 100%;
+        margin: 0 auto;
+        font-size: 1.4rem; }
+        #login .login-container .form-input-container .form-input__or::before, #login .login-container .form-input-container .form-input__or::after {
+          content: '';
+          position: absolute;
+          top: 50%;
+          background-color: var(--primary);
+          height: 0.8px;
+          width: 40%;
+          transform: translateY(-50%);
+          border: none; }
+        #login .login-container .form-input-container .form-input__or::before {
+          left: 1rem; }
+        #login .login-container .form-input-container .form-input__or::after {
+          right: 1rem; }
 
 h1,
 h2 {

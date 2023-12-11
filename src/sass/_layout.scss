@@ -10,13 +10,35 @@
     &--1,
     &--2 {
       display: flex;
-      justify-content: space-between;
+      // justify-content: space-between;
       padding: 1.6rem 0;
+    }
+
+    &--1 {
+      .nav-log {
+        display: flex;
+        align-items: center;
+        text-align: center;
+        &-btn {
+          padding: 0.7rem 0.7rem;
+          width: 8rem;
+          border-radius: 20px;
+          border: 1px #fff solid;
+          margin-right: 1rem;
+          transition: all 0.2s;
+
+          &:hover,
+          &:active {
+            background-color: var(--text-primary);
+          }
+        }
+      }
     }
   }
 
   &-logo {
     font-size: 2.4rem;
+    margin-right: auto;
   }
 
   &-menu {
@@ -77,6 +99,7 @@
     padding: 1rem 0;
     font-size: 1.1rem;
     transition: all 0.2s;
+    margin-right: auto;
     &:hover {
       color: var(--text-primary);
     }
@@ -381,4 +404,91 @@
 
 body.active-modal {
   overflow-y: hidden;
+}
+
+// Log-in page ////////////////////////////////////////////////////////////////
+
+#login {
+  background-color: var(--secondary);
+  padding: 10rem 25rem;
+
+  .login-container {
+    background-color: var(--secondary-light);
+    max-width: 40rem;
+    margin: 0 auto;
+    border-radius: 3px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+
+    padding: 2rem 3rem;
+
+    header {
+      text-align: center;
+      padding: 2rem;
+
+      .form-header {
+        font-size: 2.6rem;
+        color: var(--text-primary);
+      }
+    }
+    .form-input-container {
+      margin-bottom: 1.8rem;
+      text-align: center;
+      input {
+        display: block;
+        padding: 1.5rem;
+        width: 100%;
+        margin: 0 auto;
+        border-radius: 4px;
+        border-style: none;
+        border: 1px solid #d4d4d4;
+        transition: all 0.2s;
+
+        &:hover {
+          border: 1px solid var(--text-primary);
+        }
+      }
+
+      .form-input {
+        &__btn {
+          padding: 1.5rem;
+          width: 100%;
+          border: none;
+          border-radius: 4px;
+          background-color: var(--primary);
+          color: #fff;
+          font-size: 1.6rem;
+        }
+
+        &__forgot-password {
+          font-size: 1.4rem;
+          color: var(--text-primary);
+        }
+
+        &__or {
+          position: relative;
+          width: 100%;
+          margin: 0 auto;
+          font-size: 1.4rem;
+
+          &::before,
+          &::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            background-color: var(--primary);
+            height: 0.8px;
+            width: 40%;
+            transform: translateY(-50%);
+            border: none;
+          }
+          &::before {
+            left: 1rem;
+          }
+          &::after {
+            right: 1rem;
+          }
+        }
+      }
+    }
+  }
 }
