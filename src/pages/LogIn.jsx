@@ -1,8 +1,10 @@
 import React from 'react';
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { ReactComponent as userIcon } from '../assets/svg/personIcon.svg';
-import visibilityIcon from '../assets/svg/visibilityIcon.svg';
+import {ReactComponent as UserIcon} from '../assets/svg/personIcon.svg';
+import {ReactComponent as VisibilityIcon} from '../assets/svg/visibilityIcon.svg';
+import {ReactComponent as LockIcon} from '../assets/svg/lockIcon.svg';
+
 
 function LogIn() {
   const [showPassword, setShowPassword] = useState(false);
@@ -15,7 +17,12 @@ function LogIn() {
 
   const navigate = useNavigate();
 
-  const onChange = function () {};
+  const onChange = function (e) {
+    setFormData((prevState)=>({
+      ...prevState,
+      [e.target.id]:e.target.value,
+    }))
+  };
 
   return (
     <div id='login'>
@@ -23,8 +30,8 @@ function LogIn() {
         <header>
           <h2 className='form-header'>Welcome back</h2>
         </header>
-        <form action=''>
-          <div className='form-input-container'>
+        <form>
+          <div className='form-input-container form-input-container__login'>
             <input
               type='email'
               id='email'
@@ -33,8 +40,10 @@ function LogIn() {
               className='form-input form-input--email'
               placeholder='Email address'
             />
+            
+            <UserIcon className='login-icon'/>
           </div>
-          <div className='form-input-container'>
+          <div className='form-input-container form-input-container__login'>
             <input
               type={showPassword ? 'text' : 'password'}
               className='form-input form-input--password'
@@ -43,11 +52,8 @@ function LogIn() {
               value={password}
               onChange={onChange}
             />
-            <img
-              src={visibilityIcon}
-              alt='show password'
-              onClick={() => setShowPassword((prevState) => !prevState)}
-            />
+            <LockIcon className='login-icon'/>
+            <VisibilityIcon className='login-icon__visibility' onClick={() => setShowPassword((prevState) => !prevState)}/>
           </div>
           <div className='form-input-container'>
             <button className='form-input__btn'>Log In</button>
