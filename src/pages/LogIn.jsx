@@ -1,6 +1,8 @@
 import React from 'react';
 import { useState } from 'react';
+import {toast} from 'react-toastify';
 import { Link, useNavigate } from 'react-router-dom';
+import {getAuth, signInWithEmailAndPassword} from 'firebase/auth';
 import {ReactComponent as UserIcon} from '../assets/svg/personIcon.svg';
 import {ReactComponent as VisibilityIcon} from '../assets/svg/visibilityIcon.svg';
 import {ReactComponent as LockIcon} from '../assets/svg/lockIcon.svg';
@@ -24,13 +26,29 @@ function LogIn() {
     }))
   };
 
+  const onSubmit = async function(e){
+    e.preventDefault();
+
+    try {
+      const auth = getAuth();
+      const userCredential = await signInWithEmailAndPassword(auth, email, password);
+
+      if(userCredential.user){
+        navigate('/')
+      }
+    } catch (error) {
+      toast.error('Bad User Credentials');
+    }
+
+  }
+
   return (
     <div id='login'>
       <div className='login-container'>
         <header>
           <h2 className='form-header'>Welcome back</h2>
         </header>
-        <form>
+        <form onSubmit={onSubmit}>
           <div className='form-input-container form-input-container__login'>
             <input
               type='email'

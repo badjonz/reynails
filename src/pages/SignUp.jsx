@@ -1,21 +1,27 @@
 import React from 'react';
 import { useState } from 'react';
+import {toast} from 'react-toastify';
 import { Link, useNavigate } from 'react-router-dom';
 import {ReactComponent as UserIcon} from '../assets/svg/personIcon.svg';
 import {ReactComponent as VisibilityIcon} from '../assets/svg/visibilityIcon.svg';
 import {ReactComponent as LockIcon} from '../assets/svg/lockIcon.svg';
 import {ReactComponent as PersonIcon} from '../assets/svg/userCardIcon.svg';
+import { ReactComponent as EmailIcon } from '../assets/svg/envelopeIcon.svg';
+import { getAuth, createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+import { doc, setDoc, serverTimestamp } from "firebase/firestore"; 
+import { db } from '../firebase.config'
 
 
 function SignUp() {
   const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState({
     name:'',
+    userName:'',
     email: '',
     password: '',
   });
 
-  const { name,email, password } = formData;
+  const { name, userName, email, password } = formData;
 
   const navigate = useNavigate();
 
@@ -26,13 +32,36 @@ function SignUp() {
     }))
   };
 
+  const onSubmit = async function(e){
+    e.preventDefault();
+
+    try {
+      const auth= getAuth();
+      const userCredential = await createUserWithEmailAndPassword(auth,email,password);
+      const user = userCredential.user;
+      updateProfile(auth.currentUser,{
+        displayName: name,
+      });
+
+      const formDataCopy = {...formData};
+      delete formDataCopy.password;
+      formDataCopy.timestamp = serverTimestamp();
+
+      await setDoc(doc(db, 'users', user.uid), formDataCopy);
+
+      navigate('/');
+    } catch (error) {
+      toast.error('Something went wrong wtih registration');
+    }
+  }
+
   return (
     <div id='login'>
       <div className='login-container'>
         <header>
-          <h2 className='form-header'>Welcome back</h2>
+          <h2 className='form-header'>Sign Up</h2>
         </header>
-        <form>
+        <form onSubmit={onSubmit}>
           <div className='form-input-container form-input-container__login'>
             <input
               type='text'
@@ -47,6 +76,18 @@ function SignUp() {
           </div>
           <div className='form-input-container form-input-container__login'>
             <input
+              type='text'
+              id='userName'
+              value={userName}
+              onChange={onChange}
+              className='form-input'
+              placeholder='Username'
+            />
+            
+            <UserIcon className='login-icon'/>
+          </div>
+          <div className='form-input-container form-input-container__login'>
+            <input
               type='email'
               id='email'
               value={email}
@@ -55,7 +96,7 @@ function SignUp() {
               placeholder='Email address'
             />
             
-            <UserIcon className='login-icon'/>
+            <EmailIcon className='email-icon'/>
           </div>
           <div className='form-input-container form-input-container__login'>
             <input

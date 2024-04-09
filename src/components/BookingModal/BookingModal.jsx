@@ -1,9 +1,9 @@
 import React from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { addDays, parseISO } from 'date-fns';
-import { db } from '../../firebase.config';
+import { db, query, getDocs, collection, addDoc } from '../../firebase.config.js';
 
 import BookingCard from '../BookingCard/BookingCard';
 
@@ -51,7 +51,7 @@ const booking = [
 ];
 
 const BookingModal = ({ modal, toggleModal, photoName, title }) => {
-  const [bookings, setBookings] = useState(booking);
+  const [bookings, setBookings] = useState([]);
   const [fullName, setFullName] = useState('');
   const [email, setEmail] = useState('');
   const [apptDate, setApptDate] = useState('');
@@ -64,20 +64,39 @@ const BookingModal = ({ modal, toggleModal, photoName, title }) => {
   let year = dateObj.getUTCFullYear();
   const bookDate = `${year}-${month}-${day}`;
 
-  const weekFromBookingDate = `${year}-${month}-${day + 7}`;
+  const weekFromBookingDate = `${year}-${month}-${day + 7}`;// ... existing code for calculating bookDate and weekFromBookingDate
+
+  const fetchBookings = async () => {
+    try {
+      const bookingsRef = collection(db, "appointments"); // Replace "appointments" with your collection name
+      const q = query(bookingsRef); // Optional: Add filtering conditions to the query here
+      const querySnapshot = await getDocs(q);
+      const fetchedBookings = querySnapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
+      setBookings(fetchedBookings);
+      
+    } catch (error) {
+      console.error("Error fetching bookings:", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchBookings(); // Fetch bookings on component mount
+  }, []);
+
 
   const handleSubmit = function (e) {
     e.preventDefault();
-
     // let dateObj = new Date();
     // let month = dateObj.getUTCMonth() + 1; //months from 1-12
     // let day = dateObj.getUTCDate();
     // let year = dateObj.getUTCFullYear();
     // const bookDate = `${year}-${month}-${day}`;
-    const id = crypto.randomUUID();
 
     const newBooking = {
-      id,
+      id:crypto.randomUUID(),
       design: title,
       fullName,
       email,
@@ -86,7 +105,21 @@ const BookingModal = ({ modal, toggleModal, photoName, title }) => {
       bookDate,
       comment,
     };
-    setBookings((bookings) => [...bookings, newBooking]);
+
+    const bookingsRef = collection(db, "appointments");
+
+    // Add the new appointment to Firestore
+    addDoc(bookingsRef, newBooking)
+      .then((docRef) => {
+        console.log("Document written with ID:", docRef.id);
+        // Optionally update local state after successful write
+        setBookings((bookings) => [...bookings, newBooking]);
+      })
+      .catch((error) => {
+        console.error("Error adding document:", error);
+      });
+
+    
   };
 
   const [color, setColor] = useState('#757575');
@@ -112,13 +145,13 @@ const BookingModal = ({ modal, toggleModal, photoName, title }) => {
   }
 
   function getAvailableTimes(date) {
-    const bookedTimes = bookings
+    const bookingTimes = bookings
       .filter((booking) => booking.apptDate === date)
       .map((booking) => booking.time);
 
     // const allAvailableTimes = ['11:00', '14:00', '17:30'];
 
-    return bookedTimes;
+    return bookingTimes;
   }
 
   return (
@@ -138,7 +171,7 @@ const BookingModal = ({ modal, toggleModal, photoName, title }) => {
               <form onSubmit={handleSubmit}>
                 <div className='form'>
                   <div className='form-row'>
-                    <label className='form-label' htmlFor='fullname'>
+                    <label className='form-label' htmlFor='fullName'>
                       Full Name
                     </label>
                     <input
