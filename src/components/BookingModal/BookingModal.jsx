@@ -2,6 +2,7 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
+import { ToastContainer, toast } from "react-toastify";
 import { addDays, parseISO } from 'date-fns';
 import { db, query, getDocs, collection, addDoc } from '../../firebase.config.js';
 
@@ -171,6 +172,7 @@ const BookingModal = ({ modal, toggleModal, photoName, title }) => {
               <form onSubmit={handleSubmit}>
                 <div className='form'>
                   <div className='form-row'>
+                    
                     <label className='form-label' htmlFor='fullName'>
                       Full Name
                     </label>
@@ -207,7 +209,7 @@ const BookingModal = ({ modal, toggleModal, photoName, title }) => {
                       name='apptDate'
                       id='apptDate'
                       value={apptDate}
-                      className='form-input form__date'
+                      className='form-input form-input__date'
                       placeholder='dd/mm/yyyy'
                       style={{ color: color }}
                       onChange={handleDateChange}

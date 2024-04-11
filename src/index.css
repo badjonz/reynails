@@ -219,9 +219,10 @@ body {
     left: 50%;
     transform: translate(-50%, -50%);
     width: 60%;
-    height: 75vh;
+    height: 85vh;
     background-color: var(--secondary-light);
     padding: 3rem 6rem;
+    padding-left: 0;
     border-radius: 5px;
     box-shadow: 0 3rem 5rem rgba(0, 0, 0, 0.3);
     z-index: 25;
@@ -236,21 +237,22 @@ body {
     cursor: pointer;
     border: none;
     background: none; }
-  .booking-modal .flex-column {
-    flex: 1; }
   .booking-modal .flex-column--1 {
+    margin-top: -3rem;
     flex-basis: 50%;
+    text-align: center;
     border-right: var(--secondary) solid 2px; }
   .booking-modal .flex-column--2 {
-    flex-basis: 50%;
+    flex-grow: 1;
     margin-left: 3rem; }
   .booking-modal-heading {
     font-size: 2.4rem;
     font-weight: 500;
     margin-bottom: 2rem; }
   .booking-modal-img {
-    width: 90%;
-    border-radius: 2px; }
+    width: 100%;
+    border-top-left-radius: 5px;
+    border-bottom-right-radius: 5px; }
   .booking-modal .form-row {
     display: flex;
     justify-content: space-between;
@@ -263,7 +265,7 @@ body {
   .booking-modal .form-input {
     display: inline-block;
     padding: 1rem 2rem;
-    flex-basis: 70%;
+    width: 70%;
     font-size: 1.5rem;
     font-family: inherit;
     color: var(--text-primary);
@@ -272,6 +274,8 @@ body {
     transition: all 0.3s; }
     .booking-modal .form-input::placeholder {
       color: #757575; }
+    .booking-modal .form-input__date {
+      width: 55%; }
   .booking-modal .form-time__list {
     display: flex;
     justify-content: space-between;
@@ -299,7 +303,6 @@ body {
     transition: all 0.1s; }
   .booking-modal .form__comment {
     resize: none;
-    width: 70%;
     height: 8rem; }
   .booking-modal .form__button {
     cursor: pointer;
