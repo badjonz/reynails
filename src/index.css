@@ -384,6 +384,7 @@ body.active-modal {
         border-radius: 4px;
         background-color: var(--primary);
         color: #fff;
+        cursor: pointer;
         font-size: 1.6rem; }
       #login .login-container .form-input-container .form-input__forgot-password {
         font-size: 1.4rem;
@@ -392,6 +393,7 @@ body.active-modal {
         position: relative;
         width: 100%;
         margin: 0 auto;
+        margin-top: 2rem;
         font-size: 1.4rem; }
         #login .login-container .form-input-container .form-input__or::before, #login .login-container .form-input-container .form-input__or::after {
           content: '';
