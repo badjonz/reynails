@@ -12,6 +12,7 @@ import {
   createUserWithEmailAndPassword,
   updateProfile,
 } from 'firebase/auth';
+import OAuth from '../components/OAuth/OAuth';
 import { doc, setDoc, serverTimestamp } from 'firebase/firestore';
 import { db } from '../firebase.config';
 
@@ -123,24 +124,27 @@ function SignUp() {
           <div className='form-input-container'>
             <button className='form-input__btn'>Sign Up</button>
           </div>
-          {/* <div className='form-input-container'>
+        </form>
+        <div className='form-input-container'>
+          <OAuth />
+        </div>
+
+        {/* <div className='form-input-container'>
             <Link to='/forgot-password' className='form-input__forgot-password'>
               Forgot password?
             </Link>
           </div> */}
-          <div className='form-input-container'>
-            <p className='form-input__or'>or</p>
-          </div>
-          <div className='form-input-container'>
-            <Link
-              to='/log-in'
-              className='form-input__btn form-input__btn--sign-up'
-            >
-              Log In
-            </Link>
-          </div>
-        </form>
-        {/* Google OAuth */}
+        <div className='form-input-container'>
+          <p className='form-input__or'>or</p>
+        </div>
+        <div className='form-input-container'>
+          <Link
+            to='/log-in'
+            className='form-input__btn form-input__btn--sign-up'
+          >
+            Log In
+          </Link>
+        </div>
       </div>
     </div>
   );

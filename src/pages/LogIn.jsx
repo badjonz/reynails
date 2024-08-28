@@ -1,12 +1,12 @@
 import React from 'react';
 import { useState } from 'react';
-import {toast} from 'react-toastify';
+import { toast } from 'react-toastify';
 import { Link, useNavigate } from 'react-router-dom';
-import {getAuth, signInWithEmailAndPassword} from 'firebase/auth';
-import {ReactComponent as UserIcon} from '../assets/svg/personIcon.svg';
-import {ReactComponent as VisibilityIcon} from '../assets/svg/visibilityIcon.svg';
-import {ReactComponent as LockIcon} from '../assets/svg/lockIcon.svg';
-
+import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
+import { ReactComponent as UserIcon } from '../assets/svg/personIcon.svg';
+import { ReactComponent as VisibilityIcon } from '../assets/svg/visibilityIcon.svg';
+import { ReactComponent as LockIcon } from '../assets/svg/lockIcon.svg';
+import OAuth from '../components/OAuth/OAuth';
 
 function LogIn() {
   const [showPassword, setShowPassword] = useState(false);
@@ -20,27 +20,30 @@ function LogIn() {
   const navigate = useNavigate();
 
   const onChange = function (e) {
-    setFormData((prevState)=>({
+    setFormData((prevState) => ({
       ...prevState,
-      [e.target.id]:e.target.value,
-    }))
+      [e.target.id]: e.target.value,
+    }));
   };
 
-  const onSubmit = async function(e){
+  const onSubmit = async function (e) {
     e.preventDefault();
 
     try {
       const auth = getAuth();
-      const userCredential = await signInWithEmailAndPassword(auth, email, password);
+      const userCredential = await signInWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
 
-      if(userCredential.user){
-        navigate('/')
+      if (userCredential.user) {
+        navigate('/');
       }
     } catch (error) {
       toast.error('Bad User Credentials');
     }
-
-  }
+  };
 
   return (
     <div id='login'>
@@ -58,8 +61,8 @@ function LogIn() {
               className='form-input form-input--email'
               placeholder='Email address'
             />
-            
-            <UserIcon className='login-icon'/>
+
+            <UserIcon className='login-icon' />
           </div>
           <div className='form-input-container form-input-container__login'>
             <input
@@ -70,12 +73,19 @@ function LogIn() {
               value={password}
               onChange={onChange}
             />
-            <LockIcon className='login-icon'/>
-            <VisibilityIcon className='login-icon__visibility' onClick={() => setShowPassword((prevState) => !prevState)}/>
+            <LockIcon className='login-icon' />
+            <VisibilityIcon
+              className='login-icon__visibility'
+              onClick={() => setShowPassword((prevState) => !prevState)}
+            />
           </div>
           <div className='form-input-container'>
             <button className='form-input__btn'>Log In</button>
           </div>
+          <div className='form-input-container'>
+            <OAuth />
+          </div>
+
           <div className='form-input-container'>
             <Link to='/forgot-password' className='form-input__forgot-password'>
               Forgot password?
@@ -93,7 +103,6 @@ function LogIn() {
             </Link>
           </div>
         </form>
-        {/* Google OAuth */}
       </div>
     </div>
   );
