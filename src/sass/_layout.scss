@@ -514,6 +514,11 @@ body.active-modal {
         }
       }
 
+      &__forgot-password {
+        margin-top: 2rem;
+        margin-bottom: -1.5rem;
+      }
+
       .form-input {
         &__btn {
           padding: 1.5rem;
@@ -555,6 +560,25 @@ body.active-modal {
           &::after {
             right: 1rem;
           }
+        }
+      }
+    }
+
+    .social-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      &__text {
+        font-size: 1.4rem;
+      }
+
+      &__google {
+        border: none;
+        display: inline-block;
+        margin-left: 1rem;
+        cursor: pointer;
+        &-img {
+          width: 2rem;
         }
       }
     }

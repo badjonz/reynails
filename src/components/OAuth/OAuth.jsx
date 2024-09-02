@@ -53,7 +53,8 @@ function OAuth() {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const onGoogleClick = async function () {
+  const onGoogleClick = async function (e) {
+    e.preventDefault();
     try {
       const auth = getAuth();
       const provider = new GoogleAuthProvider();
@@ -81,18 +82,28 @@ function OAuth() {
 
       navigate('/');
     } catch (error) {
-      console.error('Error:', error);
-      toast.error('Could not authorize with Google');
+      if (error.code === 'auth/popup-closed-by-user') {
+        toast.error('Sign-in canceled by user.');
+      } else {
+        console.error('Error:', error);
+        toast.error('Could not authorize with Google');
+      }
     }
+    // } catch (error) {
+    //   console.error('Error:', error);
+    //   toast.error('Could not authorize with Google');
+    // }
   };
 
   return (
-    <div>
-      <p>{location.pathname === '/sign-up' ? 'Sign up' : 'Log in'} with </p>
-      <button className='social-icon-google' onClick={onGoogleClick}>
+    <div className='social-icon'>
+      <p className='social-icon__text'>
+        {location.pathname === '/sign-up' ? 'Sign up' : 'Log in'} with{' '}
+      </p>
+      <button className='social-icon__google' onClick={onGoogleClick}>
         <img
           src={googleIcon}
-          className='social-icon-google__img'
+          className='social-icon__google-img'
           alt='google'
         />
       </button>

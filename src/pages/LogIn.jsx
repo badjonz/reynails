@@ -86,7 +86,7 @@ function LogIn() {
             <OAuth />
           </div>
 
-          <div className='form-input-container'>
+          <div className='form-input-container form-input-container__forgot-password'>
             <Link to='/forgot-password' className='form-input__forgot-password'>
               Forgot password?
             </Link>

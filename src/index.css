@@ -377,6 +377,9 @@ body.active-modal {
         transition: all 0.2s; }
         #login .login-container .form-input-container input:hover {
           border: 1px solid var(--text-primary); }
+      #login .login-container .form-input-container__forgot-password {
+        margin-top: 2rem;
+        margin-bottom: -1.5rem; }
       #login .login-container .form-input-container .form-input__btn {
         padding: 1.5rem;
         width: 100%;
@@ -408,6 +411,19 @@ body.active-modal {
           left: 1rem; }
         #login .login-container .form-input-container .form-input__or::after {
           right: 1rem; }
+    #login .login-container .social-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center; }
+      #login .login-container .social-icon__text {
+        font-size: 1.4rem; }
+      #login .login-container .social-icon__google {
+        border: none;
+        display: inline-block;
+        margin-left: 1rem;
+        cursor: pointer; }
+        #login .login-container .social-icon__google-img {
+          width: 2rem; }
 
 .profile {
   background-color: var(--secondary);

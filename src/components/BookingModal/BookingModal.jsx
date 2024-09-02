@@ -2,54 +2,60 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-import { ToastContainer, toast } from "react-toastify";
+import { ToastContainer, toast } from 'react-toastify';
 import { addDays, parseISO } from 'date-fns';
-import { db, query, getDocs, collection, addDoc } from '../../firebase.config.js';
+import {
+  db,
+  query,
+  getDocs,
+  collection,
+  addDoc,
+} from '../../firebase.config.js';
 
 import BookingCard from '../BookingCard/BookingCard';
 
-const booking = [
-  {
-    id: '342345',
-    design: 'Test 1',
-    name: 'Jon Kumar',
-    email: 'badjonz@gmail.com',
-    bookDate: '2023-11-24',
-    apptDate: '2023-12-01',
-    time: '11:00',
-    comments: 'I would like this in a different colour if possible.',
-  },
-  {
-    id: '645642',
-    design: 'Test 4',
-    name: 'Peter Ann',
-    email: 'pj@gmail.com',
-    bookDate: '2023-11-28',
-    apptDate: '2023-12-05',
-    time: '14:00',
-    comments: 'Is this available in pink?',
-  },
-  {
-    id: '313432',
-    design: 'Test 3',
-    name: 'Fatma',
-    email: 'fatma@gmail.com',
-    bookDate: '2023-11-25',
-    apptDate: '2023-12-02',
-    time: '14:00',
-    comments: 'Could I make a little changes to this design?',
-  },
-  {
-    id: '756744',
-    design: 'Test 1',
-    name: 'Heshani',
-    email: 'heshani@gmail.com',
-    bookDate: '2023-11-25',
-    apptDate: '2023-12-07',
-    time: '17:30',
-    comments: 'Hello, my name is Heshani.',
-  },
-];
+// const booking = [
+//   {
+//     id: '342345',
+//     design: 'Test 1',
+//     name: 'Jon Kumar',
+//     email: 'badjonz@gmail.com',
+//     bookDate: '2023-11-24',
+//     apptDate: '2023-12-01',
+//     time: '11:00',
+//     comments: 'I would like this in a different colour if possible.',
+//   },
+//   {
+//     id: '645642',
+//     design: 'Test 4',
+//     name: 'Peter Ann',
+//     email: 'pj@gmail.com',
+//     bookDate: '2023-11-28',
+//     apptDate: '2023-12-05',
+//     time: '14:00',
+//     comments: 'Is this available in pink?',
+//   },
+//   {
+//     id: '313432',
+//     design: 'Test 3',
+//     name: 'Fatma',
+//     email: 'fatma@gmail.com',
+//     bookDate: '2023-11-25',
+//     apptDate: '2023-12-02',
+//     time: '14:00',
+//     comments: 'Could I make a little changes to this design?',
+//   },
+//   {
+//     id: '756744',
+//     design: 'Test 1',
+//     name: 'Heshani',
+//     email: 'heshani@gmail.com',
+//     bookDate: '2023-11-25',
+//     apptDate: '2023-12-07',
+//     time: '17:30',
+//     comments: 'Hello, my name is Heshani.',
+//   },
+// ];
 
 const BookingModal = ({ modal, toggleModal, photoName, title }) => {
   const [bookings, setBookings] = useState([]);
@@ -65,11 +71,13 @@ const BookingModal = ({ modal, toggleModal, photoName, title }) => {
   let year = dateObj.getUTCFullYear();
   const bookDate = `${year}-${month}-${day}`;
 
-  const weekFromBookingDate = `${year}-${month}-${day + 7}`;// ... existing code for calculating bookDate and weekFromBookingDate
+  // Calculate the minimum date (a week from today)
+  const today = new Date();
+  const minDate = new Date(today.getTime() + 8 * 24 * 60 * 60 * 1000); // Add 7 days to today
 
   const fetchBookings = async () => {
     try {
-      const bookingsRef = collection(db, "appointments"); // Replace "appointments" with your collection name
+      const bookingsRef = collection(db, 'appointments');
       const q = query(bookingsRef); // Optional: Add filtering conditions to the query here
       const querySnapshot = await getDocs(q);
       const fetchedBookings = querySnapshot.docs.map((doc) => ({
@@ -77,9 +85,8 @@ const BookingModal = ({ modal, toggleModal, photoName, title }) => {
         ...doc.data(),
       }));
       setBookings(fetchedBookings);
-      
     } catch (error) {
-      console.error("Error fetching bookings:", error);
+      console.error('Error fetching bookings:', error);
     }
   };
 
@@ -87,17 +94,11 @@ const BookingModal = ({ modal, toggleModal, photoName, title }) => {
     fetchBookings(); // Fetch bookings on component mount
   }, []);
 
-
   const handleSubmit = function (e) {
     e.preventDefault();
-    // let dateObj = new Date();
-    // let month = dateObj.getUTCMonth() + 1; //months from 1-12
-    // let day = dateObj.getUTCDate();
-    // let year = dateObj.getUTCFullYear();
-    // const bookDate = `${year}-${month}-${day}`;
 
     const newBooking = {
-      id:crypto.randomUUID(),
+      id: crypto.randomUUID(),
       design: title,
       fullName,
       email,
@@ -107,20 +108,18 @@ const BookingModal = ({ modal, toggleModal, photoName, title }) => {
       comment,
     };
 
-    const bookingsRef = collection(db, "appointments");
+    const bookingsRef = collection(db, 'appointments');
 
     // Add the new appointment to Firestore
     addDoc(bookingsRef, newBooking)
       .then((docRef) => {
-        console.log("Document written with ID:", docRef.id);
+        console.log('Document written with ID:', docRef.id);
         // Optionally update local state after successful write
         setBookings((bookings) => [...bookings, newBooking]);
       })
       .catch((error) => {
-        console.error("Error adding document:", error);
+        console.error('Error adding document:', error);
       });
-
-    
   };
 
   const [color, setColor] = useState('#757575');
@@ -155,15 +154,36 @@ const BookingModal = ({ modal, toggleModal, photoName, title }) => {
     return bookingTimes;
   }
 
+  function clearFields() {
+    setFullName('');
+    setEmail('');
+    setApptDate('');
+    setTime('');
+    setComment('');
+  }
+
   return (
     <>
       {modal && (
         <div className='booking-modal'>
-          <div className='booking-overlay' onClick={toggleModal}></div>
+          <div
+            className='booking-overlay'
+            onClick={() => {
+              clearFields();
+              toggleModal();
+            }}
+          ></div>
           <div className='booking-modal-content'>
-            <a className='close-modal' onClick={toggleModal}>
+            <a
+              className='close-modal'
+              onClick={() => {
+                clearFields();
+                toggleModal();
+              }}
+            >
               &times;
             </a>
+
             <div className='flex-column flex-column--1'>
               <img src={photoName} alt='' className='booking-modal-img' />
             </div>
@@ -172,7 +192,6 @@ const BookingModal = ({ modal, toggleModal, photoName, title }) => {
               <form onSubmit={handleSubmit}>
                 <div className='form'>
                   <div className='form-row'>
-                    
                     <label className='form-label' htmlFor='fullName'>
                       Full Name
                     </label>
@@ -204,6 +223,7 @@ const BookingModal = ({ modal, toggleModal, photoName, title }) => {
                     <label className='form-label' htmlFor='date'>
                       Date
                     </label>
+
                     <input
                       type='date'
                       name='apptDate'
@@ -213,16 +233,8 @@ const BookingModal = ({ modal, toggleModal, photoName, title }) => {
                       placeholder='dd/mm/yyyy'
                       style={{ color: color }}
                       onChange={handleDateChange}
-                      min={weekFromBookingDate}
+                      min={minDate.toISOString().slice(0, 10)} // Set the minimum date
                     />
-                    {/* <DatePicker
-                      className='form-input'
-                      showIcon
-                      selected={apptDate}
-                      dateFormat='yyyy-MM-dd'
-                      onChange={handleDateChange}
-                      minDate={new Date()}
-                    /> */}
                   </div>
                   <div className='form-row'>
                     <label className='form-label' htmlFor='time'>
@@ -246,17 +258,7 @@ const BookingModal = ({ modal, toggleModal, photoName, title }) => {
                           11:00
                         </label>
                       </li>
-                      {/* <label
-                          className={`form-time__btn ${
-                            time === '11:00' ? 'form-time__btn--selected' : ''
-                          }`}
-                          htmlFor='time1'
-                        >
-                          11:00
-                        </label> */}
-                      {/* bookings.map((booking)=>{
-                             if(booking.apptDate === apptDate)
-                           }) */}
+
                       <li className='form-time__item'>
                         <input
                           id='time2'

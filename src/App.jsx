@@ -8,10 +8,17 @@ import Profile from './pages/Profile';
 import LogIn from './pages/LogIn';
 import SignUp from './pages/SignUp';
 import ForgotPassword from './pages/ForgotPassword';
+// import { useContext } from 'react';
+// import { UserContext } from './components/UserContext/UserContext';
 
 function App() {
+  // const user = useContext(UserContext);
+
+  // // Use the user data here
+  // console.log(user);
   return (
     <div className='App'>
+      {/* <UserProvider> */}
       <Router>
         <Header />
         <Routes>
@@ -26,6 +33,7 @@ function App() {
       </Router>
 
       <ToastContainer />
+      {/* </UserProvider> */}
     </div>
   );
 }
